@@ -1,0 +1,57 @@
+//TC: Time limit exceed
+
+
+class MyHashSet {
+    
+    int mainHash = 1000;
+    int chainHash = 1000;
+    
+    boolean [][] arr = new boolean [mainHash][];
+    
+    public int mainHash(int value){
+        return value % mainHash;
+    }
+    
+    public int chainHash(int value){
+        return value / mainHash;
+    }
+    
+
+    public MyHashSet() {
+        
+    }
+    
+    public void add(int key) {
+        int main = mainHash(key);
+        int chain = chainHash(key);
+        if(arr[main] == null){
+            arr[main] = new boolean[chainHash];
+        }
+        arr[main][chain] = true;
+    }
+    
+    public void remove(int key) {
+        int main = mainHash(key);
+        int chain = chainHash(key);
+        
+        if(arr[main] != null){
+             arr[main][chain] = false;
+        }
+            
+    }
+    
+    public boolean contains(int key) {
+        int main = mainHash(key);
+        int chain = chainHash(key);
+        
+        return arr[main] != null && arr[main][chain];
+    }
+}
+
+/**
+ * Your MyHashSet object will be instantiated and called as such:
+ * MyHashSet obj = new MyHashSet();
+ * obj.add(key);
+ * obj.remove(key);
+ * boolean param_3 = obj.contains(key);
+ */
